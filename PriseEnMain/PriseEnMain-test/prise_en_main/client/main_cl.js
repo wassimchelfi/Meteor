@@ -90,7 +90,7 @@ Template.coins.events({
 }); 
 
 function collecte(mn){
-  for (i=1; i<3; i++)
+  for (i=1; i<5; i++)
   { 
     setInterval(getData(i), 60000*mn);
   }
