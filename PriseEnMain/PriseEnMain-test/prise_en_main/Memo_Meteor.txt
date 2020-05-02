@@ -1,0 +1,99 @@
+import { Messages } from "./both/collections"
+
+meteor run --port 8080
+
+///////////////////////////////////
+
+Coins.find()
+
+renvoie un cursseur
+// => Cursor {collection: LocalCollection, sorter: null, matcher: Matcher, _selectorId: undefined, skip: 0, …}
+///////////////////////////////////
+Coins.find().fetch()
+
+// => []  = Renvoie un tableau
+///////////////////////////////////
+Coins.find().count();
+
+// => Renvoie le nobre de documents dans la collection
+///////////////////////////////////
+Coins.insert('Salut'); 
+// => "RqnxuN3BuTnqoeAZu" : _id du document
+
+Coins.find({_id:'RqnxuN3BuTnqoeAZu'}).fetch();
+// => 0: {0: "S", 1: "a", 2: "l", 3: "u", 4: "t", _id: "RqnxuN3BuTnqoeAZu"}
+///////////////////////////////////
+Coins.insert({content_toto:'Salut'});
+
+// => {_id: "akz258wipP2jkmL54", content_toto: "Salut"}
+///////////////////////////////////
+Coins.findOne({_id:"akz258wipP2jkmL54"})
+
+// => {_id: "akz258wipP2jkmL54", content: "Salut"}
+///////////////////////////////////
+Coins.update({_id:"akz258wipP2jkmL54"}, {$set: {content_toto:'Btc'}})
+
+// => 1 => true / OK
+
+Coins.findOne({_id:"akz258wipP2jkmL54"})
+
+// => {_id: "akz258wipP2jkmL54", content: "Salut !", content_toto: "Btc"}
+///////////////////////////////////
+Coins.remove({_id:"akz258wipP2jkmL54"})
+// => 1
+
+Coins.findOne({_id:"akz258wipP2jkmL54"})
+// => undefined
+///////////////////////////////////
+event.preventDefault();
+
+// => Empeche le navigateur de se rafraichir
+///////////////////////////////////
+let messageDoc = {
+    content: message,
+    dateAdd: new Date()
+  }
+
+  Messages.insert(messageDoc)
+
+// => (1) LcEC692q2mteTvjyt
+///////////////////////////////////
+let id = Messages.insert(messageDoc)
+console.log('MongoDB contenu' , Messages.findOne({_id: id}).content);
+
+// => Afficher le contenu d'un document
+///////////////////////////////////
+// Afficher contenu d'un tableau
+
+JS
+Template.form.helpers({
+    messages() {
+        return Messages.find().fetch();
+    }
+});
+
+HTML
+{{#each message in messages}}
+    <p>{{message.content}}</p>
+  {{/each}}
+// =>
+///////////////////////////////////
+
+
+// =>
+///////////////////////////////////
+
+
+// =>
+///////////////////////////////////
+
+
+// =>
+///////////////////////////////////
+
+
+// =>
+///////////////////////////////////
+
+
+// =>
